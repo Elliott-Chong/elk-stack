@@ -13,22 +13,18 @@ services:
     image: redis:6.2
 
   logstash-agent:
-    image: logstash:7.11.1
-    volumes:
-      - ./test.ts:/etc/logstash/test.ts
-      - ./logstash-agent:/etc/logstash
-    command: logstash -f /etc/logstash/logstash.conf
+    build:
+      context: ./logstash-agent
+      dockerfile: Dockerfile
     depends_on:
       - elasticsearch
     ports:
       - 12201:12201/udp
 
   logstash-central:
-    image: logstash:7.11.1
-    volumes:
-      - ./test.ts:/etc/logstash/test.ts
-      - ./logstash-central:/etc/logstash
-    command: logstash -f /etc/logstash/logstash.conf
+    build:
+      context: ./logstash-agent
+      dockerfile: Dockerfile
     depends_on:
       - elasticsearch
 
