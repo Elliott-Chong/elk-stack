@@ -15,7 +15,7 @@ services:
   logstash-agent:
     image: logstash:7.11.1
     volumes:
-      - ./logstash-agent:/etc/logstash
+      - ./logstash-agent/logstash.conf:/etc/logstash/logstash.conf
     command: logstash -f /etc/logstash/logstash.conf
     depends_on:
       - elasticsearch
@@ -25,7 +25,7 @@ services:
   logstash-central:
     image: logstash:7.11.1
     volumes:
-      - ./logstash-central:/etc/logstash
+      - ./logstash-central/logstash.conf:/etc/logstash/logstash.conf
     command: logstash -f /etc/logstash/logstash.conf
     depends_on:
       - elasticsearch
@@ -38,3 +38,6 @@ services:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     depends_on:
       - elasticsearch
+
+
+# sudo docker exec -u 0 56c296a937b0 chown 1000:1000 /usr/share/elasticsearch/data
