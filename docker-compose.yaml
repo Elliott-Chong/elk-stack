@@ -13,7 +13,7 @@ services:
     build:
       context: ./logstash-agent
       dockerfile: Dockerfile
-    volumns:
+    volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers
     depends_on:
       - elasticsearch
