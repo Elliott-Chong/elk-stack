@@ -7,18 +7,18 @@ services:
       - discovery.type=single-node
     volumes:
       - ./elasticsearch_data/:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
     mem_limit: "1g"
 
   logstash-agent:
     build:
       context: ./logstash-agent
       dockerfile: Dockerfile
-    volumes:
-      - /var/lib/docker/containers:/var/lib/docker/containers
-    depends_on:
-      - elasticsearch
     ports:
       - 12201:12201/udp
+    depends_on:
+      - elasticsearch
 
   kibana:
     image: kibana:7.11.1
