@@ -9,6 +9,7 @@ services:
       - ./elasticsearch_data/:/usr/share/elasticsearch/data
     mem_limit: "1g"
 
+  logstash-agent:
     build:
       context: ./logstash-agent
       dockerfile: Dockerfile
